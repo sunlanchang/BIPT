@@ -59,7 +59,7 @@ try:
     if round(GPA / sum_credit):
         print(sum_credit)
         print(GPA)
-        print(round(GPA / sum_credit))
+        print(round(GPA / sum_credit, 2))
 except:
     pass
     print('cuo wu')
