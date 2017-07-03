@@ -1,7 +1,7 @@
 #! ~/bin/python3
 # coding: utf-8
-from bs4 import BeautifulSoup
 import requests
+from bs4 import BeautifulSoup
 
 
 class StudentPage(object):
@@ -22,7 +22,7 @@ class StudentPage(object):
             self.id2 = "0" + str(id2)
         else:
             self.id2 = str(id2)
-        self.id = self.id1 + self.id2
+        self.id = self.id
         self.URL_jbxx = self.URL_jbxx + self.id
         self.URL_grade = self.URL_grade + self.id
         self.URL_zizhu = self.URL_zizhu + self.id
@@ -33,7 +33,13 @@ class StudentPage(object):
         self.URL_job = self.URL_job + self.id
 
 
+# 判断某一届学生学号结束的数字
 for id in range(1, 999):
-    student = StudentPage("040", id)
-    print(student.__dict__)
-    # break
+    student = StudentPage("041", 800)
+    r = requests.get("http://" + student.URL_jbxx)
+    print(r.text)
+    if r.text != 200:
+        print("结束位置：" + student.id)
+        break
+    else:
+        print(student.id)
