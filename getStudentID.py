@@ -22,7 +22,7 @@ class StudentPage(object):
             self.id2 = "0" + str(id2)
         else:
             self.id2 = str(id2)
-        self.id = self.id
+        self.id = self.id1 + self.id2
         self.URL_jbxx = self.URL_jbxx + self.id
         self.URL_grade = self.URL_grade + self.id
         self.URL_zizhu = self.URL_zizhu + self.id
@@ -37,9 +37,12 @@ class StudentPage(object):
 for id in range(1, 999):
     student = StudentPage("041", 800)
     r = requests.get("http://" + student.URL_jbxx)
-    print(r.text)
+    # print(r.text)
+    soup = BeautifulSoup(r.text, "lxml")
+    print(soup.get_text())
     if r.text != 200:
         print("结束位置：" + student.id)
         break
     else:
         print(student.id)
+    break
