@@ -35,14 +35,14 @@ class StudentPage(object):
 
 # 判断某一届学生学号结束的数字
 for id in range(1, 999):
-    student = StudentPage("041", 800)
+    student = StudentPage("041", id)
     r = requests.get("http://" + student.URL_jbxx)
-    # print(r.text)
     soup = BeautifulSoup(r.text, "lxml")
-    print(soup.get_text())
-    if r.text != 200:
-        print("结束位置：" + student.id)
-        break
+    if soup.find_all('th') != []:
+        # print(student.id)
+        pass
     else:
-        print(student.id)
-    break
+        print(str(id) + '不存在')
+        print(student.URL_jbxx)
+
+    # break
