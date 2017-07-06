@@ -2,6 +2,7 @@
 # coding: utf-8
 from bs4 import BeautifulSoup
 import requests
+import os
 
 
 class StudentPage(object):
@@ -43,6 +44,14 @@ class StudentPage(object):
 
 
 for id in range(1, 999):
-    student = StudentPage("040", id)
-    print(student.URL)
+    student = StudentPage('040', id)
+    path = '/home/sun/workspace/data/' + student.id
+    os.mkdir(path)
+    for (k, v) in student.Content.items():
+        if k != 'photo':
+            filename = k + '.html'
+            open(path + '/' + filename, 'w').write(v)
+        else:
+            filename = k + '.jpg'
+            open(path + '/' + filename, 'wb').write(v)
     break
