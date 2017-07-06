@@ -20,11 +20,17 @@ class StudentPage(object):
             'photo': "xsfw.bipt.edu.cn/fwzx/xs_photo/5120"
         }
         self.Content = {}
-        self.id1 = id1
+
+        if len(str(id1)) == 1:
+            self.id1 = "0" + str(id1)
+        else:
+            self.id1 = str(id1)
 
         if len(str(id2)) == 1:
-            self.id2 = "00" + str(id2)
+            self.id2 = "000" + str(id2)
         elif len(str(id2)) == 2:
+            self.id2 = "00" + str(id2)
+        elif len(str(id2)) == 3:
             self.id2 = "0" + str(id2)
         else:
             self.id2 = str(id2)
@@ -44,8 +50,8 @@ class StudentPage(object):
                 self.Content[k] = cnt
 
 
-for id in range(1, 999):
-    student = StudentPage('040', id)
+for id in range(1, 1719):
+    student = StudentPage(4, id)
     path = '/home/sun/workspace/data/' + student.id
     os.mkdir(path)
     for (k, v) in student.Content.items():
