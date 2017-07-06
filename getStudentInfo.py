@@ -44,4 +44,5 @@ class StudentPage(object):
 
 for id in range(1, 999):
     student = StudentPage("040", id)
+    print(student.URL)
     break
