@@ -3,6 +3,7 @@
 from bs4 import BeautifulSoup
 import requests
 import os
+import codecs
 
 
 class StudentPage(object):
@@ -50,8 +51,8 @@ for id in range(1, 999):
     for (k, v) in student.Content.items():
         if k != 'photo':
             filename = k + '.html'
-            open(path + '/' + filename, 'w').write(v)
+            codecs.open(path + '/' + filename, 'w', 'gbk').write(v)
         else:
             filename = k + '.jpg'
             open(path + '/' + filename, 'wb').write(v)
-    break
+    print(student.id, '爬取完毕')
