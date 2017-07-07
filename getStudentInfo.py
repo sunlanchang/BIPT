@@ -59,12 +59,12 @@ for id in range(1, 1609):
             filename = k + '.html'
             try:
                 codecs.open(path + '/' + filename, 'w', 'gbk').write(v)
-            except expression as identifier:
+            except:
                 pass
         else:
             filename = k + '.jpg'
             try:
                 open(path + '/' + filename, 'wb').write(v)
-            except expression as identifier:
+            except:
                 pass
     print(student.id, '爬取完毕')
