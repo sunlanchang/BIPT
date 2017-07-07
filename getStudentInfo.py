@@ -57,8 +57,14 @@ for id in range(1, 1609):
     for (k, v) in student.Content.items():
         if k != 'photo':
             filename = k + '.html'
-            codecs.open(path + '/' + filename, 'w', 'gbk').write(v)
+            try:
+                codecs.open(path + '/' + filename, 'w', 'gbk').write(v)
+            except expression as identifier:
+                pass
         else:
             filename = k + '.jpg'
-            open(path + '/' + filename, 'wb').write(v)
+            try:
+                open(path + '/' + filename, 'wb').write(v)
+            except expression as identifier:
+                pass
     print(student.id, '爬取完毕')
