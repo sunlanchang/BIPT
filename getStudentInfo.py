@@ -50,8 +50,8 @@ class StudentPage(object):
                 self.Content[k] = cnt
 
 
-for id in range(1, 1609):
-    student = StudentPage(6, id)
+for id in range(1, 1653):
+    student = StudentPage(16, id)
     path = '/home/sun/workspace/data/' + student.id
     os.mkdir(path)
     for (k, v) in student.Content.items():
