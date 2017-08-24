@@ -23,24 +23,18 @@ def getDirList(path):
 
 def getJbxx(path):
     filename = path + '/' + 'jbxx.html'
-    # pagetext = ''
-    # f = open(filename, mode='r', encoding='gbk')
-    # pagetext = f.read()
-    # f.close()
-    # soup = BeautifulSoup(pagetext, 'lxml')
-    # text = soup.get_text()
-    # print(text)
     soup = BeautifulSoup(open(filename, encoding='gbk'), 'lxml')
-    th = soup.table.th
-    print(type(th))
-    # for tag in th.find_all(re.compile("[\u4e00-\u9fa5]+")):
-    for tag in th.find_all(re.compile("[a-z]+")):
-        print(tag.name)
+    # print(soup.table)
+    try:
+        th_str = str(soup.table.th.contents[0])
+        name_stu = re.compile(u"[\u4e00-\u9fa5]+").findall(th_str)[0]
+        print(name_stu)
+    except:
+        input()
 
 
-# path = "/home/sun/workspace/temp"
 path = "/home/sun/workspace/data/bipt_student_info/16"
 dirs = getDirList(path)
 for dir in dirs:
     getJbxx(path + '/' + dir)
-    break
+    # break
