@@ -1,4 +1,4 @@
-# BiptGradeCrawler
+## 成绩爬虫
 python -verson python3  
 北京石油化工学院成绩爬虫  
 个人成绩查询  
@@ -19,3 +19,6 @@ SomeoneGrade.py为查询单个学生成绩
     14 级  141656  是最后一个学号
     15 级  151612  是最后一个学号
     16 级  161652  是最后一个学号
+## 提取数据
+`jbxx.py`用来提取学生基本信息页面的数据。  
+使用BeautifulSoup和正则表达式进行提取。
