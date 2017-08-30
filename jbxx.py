@@ -13,6 +13,8 @@ class Student(object):
                      '住宿地址': '', '邮政编码': '', '考生类别': '', '投档成绩': '',  '数学成绩': '', '家庭地址': '', '考生特长': '', '奖惩情况': '',
                      '考生特征': '', '政审意见': '', '毕业中学': '', '备注': '', '政治面貌': '', '生源地': '', '班级职务': '', '外语语种': '', '手机号': '', '户口所在地': '',
                      '科类': '', '语文成绩': '', '外语成绩': '', '班主任': ''}
+        self.grade = {'序号': '',	'学期': '',	'课程编号': '',	'课程名称': '',
+                      '学分': '',	'课程性质'	: '', '成绩': '',	'考试类型': ''}
 
 
 def getDirList(path):
@@ -25,7 +27,6 @@ def getJbxx(path):
     filename = path + '/' + 'jbxx.html'
     soup = BeautifulSoup(open(filename, encoding='gbk'), 'lxml')
     th_str = str(soup.table.th.contents[0])
-    # student.jbxx["姓名"] = re.compile(u"[\u4e00-\u9fa5]+").findall(th_str)[0]
     info = []
     for tag in soup.table.find_all('td'):
         info.append(str(tag.contents[0]))
@@ -69,4 +70,4 @@ path = "/home/sun/workspace/data/bipt_student_info/16"
 dirs = getDirList(path)
 for dir in dirs:
     getJbxx(path + '/' + dir)
-    # input()
+    input()
