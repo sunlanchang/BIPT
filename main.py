@@ -26,7 +26,6 @@ def getDirList(path):
 def getJbxx(path):
     filename = path + '/' + 'jbxx.html'
     soup = BeautifulSoup(open(filename, encoding='gbk'), 'lxml')
-    th_str = str(soup.table.th.contents[0])
     info = []
     for tag in soup.table.find_all('td'):
         info.append(str(tag.contents[0]))
@@ -66,8 +65,20 @@ def getJbxx(path):
     print(len(info_clean))
 
 
+def getGrade(path):
+    filename = path + '/' + 'grade.html'
+    soup = BeautifulSoup(open(filename, encoding='gbk'), 'lxml')
+    # print(soup)
+    tbody = soup.table.tbody
+    # print(tbody)
+    for div in tbody.find_all('div'):
+        print(div.contents[0])
+
+
 path = "/home/sun/workspace/data/bipt_student_info/16"
 dirs = getDirList(path)
 for dir in dirs:
-    getJbxx(path + '/' + dir)
+    # getJbxx(path + '/' + dir)
+    getGrade(path + '/' + dir)
     input()
+    # break
