@@ -29,6 +29,8 @@ class Student(object):
                      '是否有北京市城市居民困难补助金领取证'	: '',	'是否绿色通道'	: '',
                      '是否务农'	: '',	'家庭成员健康状况'	 '家庭成员均健康'
                      '家庭经济情况'	: ''}
+        self.pingbi = {'班级': '',	'姓名': '',	'学年学期'	: '',
+                       '公寓楼'	: '', '宿舍'	: '', '周次'	: '', '宿舍成绩': ''}
 
 
 def getDirList(path):
@@ -132,13 +134,35 @@ def getJtjj(path):
         return info
 
 
+def getPingbi(path):
+    soup = getSoup(path, 'pingbi.html')
+    info = []
+    for tr in soup.table.find_all('tr'):
+        for td in tr.find_all('td'):
+            if type(td.contents[0]) is element.NavigableString and len(td.contents) == 1:
+                info.append(td.contents[0].strip())
+            elif len(td.contents) == 3:
+                try:
+                    info.append(td.contents[1].contents[0] + td.contents[2])
+                except:
+                    info.append('100')
+    return info
+
+
+def getPingyou(path):
+    soup = getSoup(path, 'pingyou.html')
+
+
 path = "/home/sun/workspace/data/bipt_student_info/16"
 dirs = getDirList(path)
 for dir in dirs:
-    # getJbxx(path + '/' + dir)
-    # getGrade(path + '/' + dir)
-    # getJob(path + '/' + dir)
-    # getJtcy(path + '/' + dir)
-    getJtjj(path + '/' + dir)
+    path_dir = path + '/' + dir
+    # getJbxx(path_dir)
+    # getGrade(path_dir)
+    # getJob(path_dir)
+    # getJtcy(path_dir)
+    # getJtjj(path_dir)
+    # getPingbi(path_dir)
+    getPingyou(path_dir)
     # input()
     # break
