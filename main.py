@@ -31,6 +31,7 @@ class Student(object):
                      '家庭经济情况'	: ''}
         self.pingbi = {'班级': '',	'姓名': '',	'学年学期'	: '',
                        '公寓楼'	: '', '宿舍'	: '', '周次'	: '', '宿舍成绩': ''}
+        self.zizhu = {'序号': '',	'类别': '',	'时间': '',	'金额': ''}
 
 
 def getDirList(path):
@@ -150,7 +151,22 @@ def getPingbi(path):
 
 
 def getPingyou(path):
-    soup = getSoup(path, 'pingyou.html')
+    soup = getSoup(path, 'pingyu.html')
+    info = []
+    try:
+        words = soup.find('input')['value']
+        info.append(words)
+    except:
+        info.append('')
+    return info
+
+
+def getZizhu(path):
+    soup = getSoup(path, 'zizhu.html')
+    info = []
+    for tr in soup.table.find_all('tr'):
+        for td in tr.find_all('td'):
+            print(td.contents)
 
 
 path = "/home/sun/workspace/data/bipt_student_info/16"
@@ -163,6 +179,7 @@ for dir in dirs:
     # getJtcy(path_dir)
     # getJtjj(path_dir)
     # getPingbi(path_dir)
-    getPingyou(path_dir)
-    # input()
+    # getPingyou(path_dir)
+    getZizhu(path_dir)
+    input()
     # break
