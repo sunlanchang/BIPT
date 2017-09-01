@@ -166,7 +166,9 @@ def getZizhu(path):
     info = []
     for tr in soup.table.find_all('tr'):
         for td in tr.find_all('td'):
-            print(td.contents)
+            info.append(td.contents[0])
+    info = info[4:-1]
+    return info
 
 
 path = "/home/sun/workspace/data/bipt_student_info/16"
