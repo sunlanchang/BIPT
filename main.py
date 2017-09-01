@@ -75,10 +75,24 @@ def getGrade(path):
         print(div.contents[0])
 
 
-path = "/home/sun/workspace/data/bipt_student_info/16"
+def getJob(path):
+    filename = path + '/' + 'job.html'
+    soup = BeautifulSoup(open(filename, encoding='gbk'), 'lxml')
+    tbody = soup.table.tbody
+    # print(tbody.contents)
+    if len(tbody.contents) != 1:
+        for div in tbody.find_all('div'):
+            print(div.contents)
+        # input('input: ')
+    else:
+        pass
+
+
+path = "/home/sun/workspace/data/bipt_student_info/14"
 dirs = getDirList(path)
 for dir in dirs:
     # getJbxx(path + '/' + dir)
-    getGrade(path + '/' + dir)
-    input()
+    # getGrade(path + '/' + dir)
+    getJob(path + '/' + dir)
+    # input()
     # break
