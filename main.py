@@ -1,5 +1,6 @@
 #! ~/bin/python3
 # coding: utf-8
+from bs4 import element
 from bs4 import BeautifulSoup
 import requests
 import os
@@ -87,7 +88,7 @@ def getGrade(path):
     tbody = soup.table.tbody
     info = []
     for div in tbody.find_all('div'):
-        info.append(div.contents[0])
+        info.append(div.contents[0].strip())
     return info
 
 
@@ -97,7 +98,7 @@ def getJob(path):
     info = []
     if len(tbody.contents) != 1:
         for div in tbody.find_all('div'):
-            info.append(div.contents[0])
+            info.append(div.contents[0].strip())
     # 注意勤工助学可能为空
     return info
 
@@ -113,7 +114,22 @@ def getJtcy(path):
 
 
 def getJtjj(path):
-    soup = getSoup(path + '/' + 'jtjj.html')
+    soup = getSoup(path, 'jtjj.html')
+    info = []
+    for tr in soup.table.find_all('tr'):
+        for td in tr.find_all('td'):
+            # print(type(td.contents[0]))
+            if type(td.contents[0]) is element.NavigableString:
+                info.append(td.contents[0].strip())
+    # 判断家庭经济是否每一项都是NULL
+    isNull = True
+    for e in info:
+        if len(e) != 0:
+            isNull = False
+    if isNull:
+        return []
+    else:
+        return info
 
 
 path = "/home/sun/workspace/data/bipt_student_info/16"
@@ -122,6 +138,7 @@ for dir in dirs:
     # getJbxx(path + '/' + dir)
     # getGrade(path + '/' + dir)
     # getJob(path + '/' + dir)
-    getJtcy(path + '/' + dir)
+    # getJtcy(path + '/' + dir)
+    getJtjj(path + '/' + dir)
     # input()
     # break
