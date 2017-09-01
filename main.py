@@ -15,6 +15,19 @@ class Student(object):
                      '科类': '', '语文成绩': '', '外语成绩': '', '班主任': ''}
         self.grade = {'序号': '',	'学期': '',	'课程编号': '',	'课程名称': '',
                       '学分': '',	'课程性质'	: '', '成绩': '',	'考试类型': ''}
+        self.job = {'序号': '',	'部门': '',	'岗位名称': '',
+                    '类别': '',	'酬金标准': '',	'起始时间': '',	'终止时间': ''}
+        self.jtcy = {'关系': '',	'姓名': '',	'出生日期': '',
+                     '现工作单位及职务': '',	'固定电话': '',	'手机号码': '',	'月收入': ''}
+        self.jtjj = {'是否烈士子女'	: '',	'是否孤儿': '',
+                     '是否单亲家庭'	: '',	'单亲类型': '',
+                     '是否重度残疾'	: '',	'家庭人均月收入(元)'	: '',
+                     '是否有低收入证明'	: '',	'是否有低保证明	': '',
+                     '是否家庭受灾'	: '',	'是否家庭遭遇突发意外事件'	: '',
+                     '是否有家庭主要成员残疾'	: '',	'是否有优抚对象子女证明'	: '',
+                     '是否有北京市城市居民困难补助金领取证'	: '',	'是否绿色通道'	: '',
+                     '是否务农'	: '',	'家庭成员健康状况'	 '家庭成员均健康'
+                     '家庭经济情况'	: ''}
 
 
 def getDirList(path):
@@ -23,9 +36,14 @@ def getDirList(path):
     return dirs
 
 
-def getJbxx(path):
-    filename = path + '/' + 'jbxx.html'
+def getSoup(path, pageName):
+    filename = path + '/' + pageName
     soup = BeautifulSoup(open(filename, encoding='gbk'), 'lxml')
+    return soup
+
+
+def getJbxx(path):
+    soup = getSoup(path, 'jbxx.html')
     info = []
     for tag in soup.table.find_all('td'):
         info.append(str(tag.contents[0]))
@@ -61,38 +79,49 @@ def getJbxx(path):
                 info_clean.append(re.compile(exp[2]).findall(info[num])[0])
             except:
                 info_clean.append('NULL')
-    print(info_clean)
-    print(len(info_clean))
+    return info_clean
 
 
 def getGrade(path):
-    filename = path + '/' + 'grade.html'
-    soup = BeautifulSoup(open(filename, encoding='gbk'), 'lxml')
-    # print(soup)
+    soup = getSoup(path, 'grade.html')
     tbody = soup.table.tbody
-    # print(tbody)
+    info = []
     for div in tbody.find_all('div'):
-        print(div.contents[0])
+        info.append(div.contents[0])
+    return info
 
 
 def getJob(path):
-    filename = path + '/' + 'job.html'
-    soup = BeautifulSoup(open(filename, encoding='gbk'), 'lxml')
+    soup = getSoup(path, 'job.html')
     tbody = soup.table.tbody
-    # print(tbody.contents)
+    info = []
     if len(tbody.contents) != 1:
         for div in tbody.find_all('div'):
-            print(div.contents)
-        # input('input: ')
-    else:
-        pass
+            info.append(div.contents[0])
+    # 注意勤工助学可能为空
+    return info
 
 
-path = "/home/sun/workspace/data/bipt_student_info/14"
+def getJtcy(path):
+    soup = getSoup(path, 'jtcy.html')
+    info = []
+    for tr in soup.table.find_all('tr'):
+        for td in tr.find_all('td'):
+            info.append(td.contents[0])
+    # 注意家庭成员可能为空
+    print(info[7:-1])
+
+
+def getJtjj(path):
+    soup = getSoup(path + '/' + 'jtjj.html')
+
+
+path = "/home/sun/workspace/data/bipt_student_info/16"
 dirs = getDirList(path)
 for dir in dirs:
     # getJbxx(path + '/' + dir)
     # getGrade(path + '/' + dir)
-    getJob(path + '/' + dir)
+    # getJob(path + '/' + dir)
+    getJtcy(path + '/' + dir)
     # input()
     # break
