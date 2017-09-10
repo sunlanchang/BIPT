@@ -22,4 +22,3 @@
 - `jbxx.py`用来提取学生基本信息页面的数据。  
 - 使用BeautifulSoup和正则表达式进行提取。  
 - 其余页面用bs4的find_all()提取表格数据。  
-- `find_all()`提取  

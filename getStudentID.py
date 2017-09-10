@@ -51,9 +51,10 @@ class StudentPage(object):
 
 
 # 判断某一届学生学号结束的数字
-for class_ in range(4, 17):
+for class_ in range(17, 18):
     print('正在获取 0', class_, '级最后一位学号，需要一点时间....')
     for id in range(2000, -1, -1):
+        print(id)
         student = StudentPage(class_, id)
         r = requests.get("http://" + student.URL['jbxx'])
         soup = BeautifulSoup(r.text, "lxml")
