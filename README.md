@@ -1,7 +1,12 @@
-## 北京石油化工学院成绩爬虫   
-`python -verson python3  `
+# 北京石油化工学院成绩爬虫
+### 版本信息和功能
+- `python` 版本为 `python 3.5.2`
 - `MajorRank.py`为查看学院学生排名
 - `SomeoneGrade.py`为查询单个学生成绩  
+- `getSdudentID.py`为获得某一个年级的最后一个学号
+- `getInfo.py`为获取学生数据
+## 获取数据
+- 使用`request`进行爬取网页，使用`bs4`和`lxml`解析网页
 ```
 各年级最后一个学号
 4 级  041718  
@@ -20,5 +25,7 @@
 ```
 ## 提取数据
 - `jbxx.py`用来提取学生基本信息页面的数据。  
-- 使用BeautifulSoup和正则表达式进行提取。  
-- 其余页面用bs4的find_all()提取表格数据。  
+- 使用`BeautifulSoup`和正则表达式进行提取。  
+- 其余页面用`bs4``的find_all()`提取表格数据。  
+## 存储数据
+- 使用csv暂时存储数据
