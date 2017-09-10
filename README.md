@@ -5,6 +5,7 @@
 - `SomeoneGrade.py`为查询单个学生成绩  
 - `getSdudentID.py`为获得某一个年级的最后一个学号
 - `getInfo.py`为获取学生数据
+- `test.py`用于测试
 ## 获取数据
 - 使用`request`进行爬取网页，使用`bs4`和`lxml`解析网页
 ```
