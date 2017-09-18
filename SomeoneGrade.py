@@ -8,7 +8,7 @@ url = "http://xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_score_gr.jsp?yonghm=5120" + \
     str(stuid)
 response = requests.get(url)
 student = []
-html = response.content
+html = response.text
 soup = BeautifulSoup(html, 'lxml')
 for element in soup.tbody.find_all('tr'):
     lession = []
@@ -57,9 +57,10 @@ for grade in res:
     #print(sum_credit, GPA)
 try:
     if round(GPA / sum_credit):
-        print(sum_credit)
-        print(GPA)
-        print(round(GPA / sum_credit, 2))
-except:
-    pass
-    print('cuo wu')
+        # print(sum_credit)
+        # print(GPA)
+        print(round(GPA / sum_credit, 4))
+except Exception as e:
+    print(str(e))
+    input()
+# 计 150671 150766
