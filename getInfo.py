@@ -10,10 +10,9 @@ import re
 
 class Student(object):
     def __init__(self):
-        self.jbxx = ['校园卡号', '姓名', '性别', '年级', '所属院系', '专业', '班级', '民族', '出生日期',
-                     '住宿地址', '邮政编码', '考生类别', '投档成绩',  '数学成绩', '家庭地址', '考生特长', '奖惩情况',
-                     '考生特征', '政审意见', '毕业中学', '备注', '政治面貌', '生源地', '班级职务', '外语语种', '手机号', '户口所在地',
-                     '科类', '语文成绩', '外语成绩', '班主任']
+        self.jbxx = ['当前状态', '校园卡号', '姓名', '性别', '年级', '所属院系', '专业', '政治面貌', '班级', '生源地', '民族', '出生日期',
+                     '手机号', '邮政编码',  '户口所在地', '考生类别', '科类', '投档成绩', '家庭地址',  '考生特长', '奖惩情况',
+                     '考生特征',  '毕业中学']
         self.grade = ['序号',	'学期',	'课程编号',	'课程名称',
                       '学分',	'课程性质'	, '成绩',	'考试类型']
         self.job = ['序号',	'部门',	'岗位名称',
@@ -187,7 +186,14 @@ def getZizhu(path):
 
 
 student = Student()
-for i in range(16, 17):
+f = open('info2.csv', 'a')
+tmp = ""
+for e in student.jbxx:
+    tmp += (str(e) + '~')
+print(tmp)
+f.write(tmp[:-1])
+f.write('\n')
+for i in range(4, 18):
     path = "/home/sun/workspace/data/bipt_student_info/" + str(i)
     dirs = getDirList(path)
     for dir in dirs:
@@ -195,13 +201,21 @@ for i in range(16, 17):
         print(path_dir)
         line = []
         line.append(getJbxx(path_dir))
-        line.append(getGrade(path_dir))
+        # line.append(getGrade(path_dir))
         # line.append(getJob(path_dir))
-        line.append(getJtcy(path_dir))
-        line.append(getJtjj(path_dir))
+        # line.append(getJtcy(path_dir))
+        # line.append(getJtjj(path_dir))
         # line.append(getPingbi(path_dir))
         # line.append(getPingyou(path_dir))
         # line.append(getZizhu(path_dir))
-        print(line)
-        input()
+        print(path_dir)
+        tmp = ""
+        for e in line[0]:
+            tmp += (e + '~')
+        f.write(tmp[:-1])
+        f.write('\n')
+        # print(path_dir)
+        #     input()
+        # input()
 # break
+f.close()

@@ -9,15 +9,15 @@ import codecs
 class StudentPage(object):
     def __init__(self, id1, id2):
         self.URL = {
-            'jbxx': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_jbxx_gr.jsp?yonghm=5120",
-            'grade': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_score_gr.jsp?yonghm=5120",
-            'zizhu': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_zizhu_gr.jsp?yonghm=5120",
-            'jtcy': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_jtcy_gr.jsp?yonghm=5120",
-            'jtjj': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_jtjj_gr.jsp?yonghm=5120",
-            'pingbi': "room.bipt.edu.cn/room/xxtj_pingbi_room_ck_pic_R.jsp?xsyhm=5120",
-            'pingyu': "xsfw.bipt.edu.cn/fwzx/xspt/xxtj/xxtj_xs_pingyu_0.jsp?yonghm=5120",
-            'job': "xsfw.bipt.edu.cn/fwzx/xspt/job/xxcx_job_xsgw_jl.jsp?xsyhm=5120",
-            'photo': "xsfw.bipt.edu.cn/fwzx/xs_photo/5120"
+            'jbxx': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_jbxx_gr.jsp?yonghm=201731",
+            'grade': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_score_gr.jsp?yonghm=201731",
+            'zizhu': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_zizhu_gr.jsp?yonghm=201731",
+            'jtcy': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_jtcy_gr.jsp?yonghm=201731",
+            'jtjj': "xsfw.bipt.edu.cn/fwzx/portal/xxcx/cx_jtjj_gr.jsp?yonghm=201731",
+            'pingbi': "room.bipt.edu.cn/room/xxtj_pingbi_room_ck_pic_R.jsp?xsyhm=201731",
+            'pingyu': "xsfw.bipt.edu.cn/fwzx/xspt/xxtj/xxtj_xs_pingyu_0.jsp?yonghm=201731",
+            'job': "xsfw.bipt.edu.cn/fwzx/xspt/job/xxcx_job_xsgw_jl.jsp?xsyhm=201731",
+            'photo': "xsfw.bipt.edu.cn/fwzx/xs_photo/201731"
         }
         self.Content = {}
 
@@ -50,9 +50,11 @@ class StudentPage(object):
                 self.Content[k] = cnt
 
 
-for id in range(1, 1653):
-    student = StudentPage(16, id)
-    path = '/home/sun/workspace/data/' + student.id
+for id in range(1, 1657):
+    student = StudentPage(id1="", id2=id)
+    path = '/home/sun/workspace/data/bipt_student_info/17/' + student.id
+    # print(path)
+    # input()
     os.mkdir(path)
     for (k, v) in student.Content.items():
         if k != 'photo':
